@@ -62,7 +62,7 @@ const app = () => <div className="container">
 function makeContact(data, index) {
   function handleClick(e) {
     e.preventDefault();
-    console.log('The link was clicked.');
+    // console.log('The link was clicked.');
     // console.log((e.target).closest('div'))
     // let clickedDiv = e.target.closest('div')
     // console.log(clickedDiv)

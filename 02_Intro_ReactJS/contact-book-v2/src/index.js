@@ -70,15 +70,12 @@ function makeContact(data, index) {
     // or
     selectDetailsContact(index)
     ReactDOM.render(app(), document.getElementById('root'))
-  }  
+  }
   return (
-    // eslint-disable-next-line
-    // <a key={data.email} href="#" onClick={handleClick}>
-        <div className="contact" key={data.email} data-id={index} onClick={handleClick}>
-            <span className="avatar small">&#9787;</span>
-            <span className="title">{data.firstName} {data.lastName}</span>
-        </div>
-    // </a>
+    <div className="contact" key={data.email} data-id={index} onClick={handleClick}>
+        <span className="avatar small">&#9787;</span>
+        <span className="title">{data.firstName} {data.lastName}</span>
+    </div>
   )
 }
 

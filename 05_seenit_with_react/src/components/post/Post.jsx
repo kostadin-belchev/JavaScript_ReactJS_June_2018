@@ -52,7 +52,7 @@ class Post extends Component {
             </div>
             <div className='controls'>
               <ul>
-                <li className='action'><a className='commentsLink' href='#'>comments</a></li>
+                <li className='action'><a className='commentsLink' href={`/postDetails/${this.props._id}`}>comments</a></li>
                 {isEditableContent}
                 {isDeletableContent}
               </ul>

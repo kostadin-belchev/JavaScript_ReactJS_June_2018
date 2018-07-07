@@ -14,7 +14,8 @@ class Catalog extends Component {
       observer.trigger(observer.events.loginUser, username)
     }
   }
-
+  // Get the pots her and then pass them as props to the postList below
+  // TO DO
   render () {
     return (
       <div>

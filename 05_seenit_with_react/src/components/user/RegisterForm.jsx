@@ -31,9 +31,10 @@ class RegisterForm extends Component {
   handleSubmit (event) {
     event.preventDefault()
     // validate if passwords match
+    // TO DO
     // register user
     auth.register(this.state.username, this.state.password).then((response) => {
-      console.log(response)
+      // console.log(response)
       // trigger the observer so we can update the header
       observer.trigger(observer.events.loginUser, response.username)
       // eslint-disable-next-line

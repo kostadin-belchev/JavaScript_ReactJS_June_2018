@@ -3,10 +3,9 @@ import observer from '../../infrastructure/observer'
 import '../../styles/notifications.css'
 
 const DEFAULT_STATE = {
-  error: null,
-  success: null,
-  loading: null,
-  hide: false
+  type: '',
+  message: '',
+  hide: true
 }
 
 class Notification extends Component {
@@ -23,22 +22,22 @@ class Notification extends Component {
   showNotification (data) {
     let message = data.message
     let type = data.type
-    this.setState({ [type]: type, message: message })
+    this.setState({ type, message, hide: false })
   }
 
   hideNotification () {
-    this.setState({ hide: true })
+    this.setState(DEFAULT_STATE)
   }
 
   render () {
     let notificationId
-    if (this.state.success) {
+    if (this.state.type === 'success') {
       notificationId = 'infoBox'
       // hide notification after 3 seconds
-      setInterval(this.hideNotification, 3000)
-    } else if (this.state.error) {
+      setTimeout(this.hideNotification, 3000)
+    } else if (this.state.type === 'error') {
       notificationId = 'errorBox'
-    } else if (this.state.loading) {
+    } else if (this.state.type === 'loading') {
       notificationId = 'loadingBox'
     }
     return (this.state.hide ? null

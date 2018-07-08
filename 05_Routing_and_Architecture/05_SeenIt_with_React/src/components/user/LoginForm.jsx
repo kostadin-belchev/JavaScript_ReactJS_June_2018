@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import auth from '../../infrastructure/auth'
 import observer from '../../infrastructure/observer'
-import saveSession from './../../infrastructure/saveSession'
 
 class LoginForm extends Component {
   constructor () {
@@ -27,9 +26,17 @@ class LoginForm extends Component {
     // login user
     auth.login(this.state.username, this.state.password).then((response) => {
       // console.log(response)
+      // trigger the observer so we can update the header
+      observer.trigger(observer.events.loginUser, response.username)
       // trigger the observer so we can show a notification in case of successful login
       observer.trigger(observer.events.notification, { type: 'success', message: 'Login successful.' })
-      saveSession(response)
+      // eslint-disable-next-line
+      sessionStorage.setItem('authtoken', response._kmd.authtoken)
+      // eslint-disable-next-line
+      sessionStorage.setItem('username', response.username)
+      // eslint-disable-next-line
+      sessionStorage.setItem('userId', response._id);
+
       // if login succcessful clear the entry fields
       this.setState({ username: '', password: '' })
       // redirect to catalog after successful login

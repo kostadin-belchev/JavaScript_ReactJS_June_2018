@@ -1,17 +1,16 @@
 import React, { Component } from 'react'
 import Navigation from './../common/Navigation'
 import '../../styles/post.css'
-import PostList from '../post/PostList'
+import MyPostsList from '../post/MyPostsList'
 import observer from '../../infrastructure/observer'
 
-class Catalog extends Component {
-  componentDidMount () {
+class MyPosts extends Component {
+  componentWillMount () {
     // eslint-disable-next-line
     let isLoggedIn = sessionStorage.getItem('authtoken')
     if (isLoggedIn) {
       // eslint-disable-next-line
       let username = sessionStorage.getItem('username')
-      // trigger the observer so we can update the header
       observer.trigger(observer.events.loginUser, username)
     }
   }
@@ -20,9 +19,12 @@ class Catalog extends Component {
     return (
       <div>
         <Navigation />
-        <section id='viewCatalog'>
+        <section id='viewMyPosts'>
+          <div className='post post-content'>
+            <h1>Your Posts</h1>
+          </div>
           <div className='posts'>
-            <PostList />
+            <MyPostsList />
           </div>
         </section>
       </div>
@@ -30,4 +32,4 @@ class Catalog extends Component {
   }
 }
 
-export default Catalog
+export default MyPosts

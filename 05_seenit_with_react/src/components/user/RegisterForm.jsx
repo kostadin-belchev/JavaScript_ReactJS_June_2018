@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import auth from '../../infrastructure/auth'
+import validateRegisterFields from '../../infrastructure/validateRegisterFields'
+import saveSession from './../../infrastructure/saveSession'
 import observer from '../../infrastructure/observer'
 
 class RegisterForm extends Component {
@@ -7,9 +9,9 @@ class RegisterForm extends Component {
     super()
 
     this.state = {
-      username: null,
-      password: null// ,
-      // passwordsMatch: false
+      username: '',
+      password: '',
+      repeatPass: ''
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -30,15 +32,23 @@ class RegisterForm extends Component {
 
   handleSubmit (event) {
     event.preventDefault()
-    // validate if passwords match
-    // TO DO
+    // validate register fields
+    if (!validateRegisterFields(this.state.username, this.state.password, this.state.repeatPass)) {
+      return
+    }
     // register user
     auth.register(this.state.username, this.state.password).then((response) => {
       // console.log(response)
-      // trigger the observer so we can update the header
-      observer.trigger(observer.events.loginUser, response.username)
-      // eslint-disable-next-line
-      sessionStorage.setItem('authtoken', response._kmd.authtoken)
+      // trigger the observer so we can show a notification in case of successful registration
+      observer.trigger(observer.events.notification, { type: 'success', message: 'User registration successful.' })
+      saveSession(response)
+      // if register succcessful clear the entry fields
+      this.setState({ username: '', password: '', repeatPass: '' })
+      // redirect to catalog after successful login
+      this.props.history.push('/catalog')
+    }).catch((response) => {
+      // trigger the observer so we can show a notification in case of unsuccessful login
+      observer.trigger(observer.events.notification, { type: 'error', message: response.responseJSON.description })
     })
   }
 
@@ -47,11 +57,11 @@ class RegisterForm extends Component {
       <form id='registerForm' onSubmit={this.handleSubmit}>
         <h2>Register</h2>
         <label>Username:</label>
-        <input name='username' type='text' onChange={this.handleChange} />
+        <input name='username' type='text' onChange={this.handleChange} value={this.state.username} />
         <label>Password:</label>
-        <input name='password' type='password' onChange={this.handleChange} />
+        <input name='password' type='password' onChange={this.handleChange} value={this.state.password} />
         <label>Repeat Password:</label>
-        <input name='repeatPass' type='password' onChange={this.handleChange} />
+        <input name='repeatPass' type='password' onChange={this.handleChange} value={this.state.repeatPass} />
         <small>{this.state.passwordsMatch ? null : 'Passwords should match'}</small>
         <input id='btnRegister' type='submit' value='Sign Up' />
       </form>

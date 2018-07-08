@@ -5,17 +5,17 @@ import PostList from '../post/PostList'
 import observer from '../../infrastructure/observer'
 
 class Catalog extends Component {
-  componentDidMount () {
+  componentWillMount () {
     // eslint-disable-next-line
     let isLoggedIn = sessionStorage.getItem('authtoken')
     if (isLoggedIn) {
       // eslint-disable-next-line
       let username = sessionStorage.getItem('username')
-      // trigger the observer so we can update the header
       observer.trigger(observer.events.loginUser, username)
     }
   }
-
+  // Get the posts first and then pass them as props to the PostList component below
+  // TO DO
   render () {
     return (
       <div>

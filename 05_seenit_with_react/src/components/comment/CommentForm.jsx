@@ -1,28 +1,35 @@
 import React, { Component } from 'react'
 
 class CommentForm extends Component {
-  constructor (props) {
-    super(props)
+  constructor () {
+    super()
 
     this.state = {
       content: ''
     }
 
-    this.handleChange = this.handleChange.bind(this)
-    // this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleContentChange = this.handleContentChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  // handleSubmit (event) {
-  //   event.preventDefault()
-  //   console.log(this.state)
-  //   console.log('submitting from form')
-  //   // this.props.addCommentFn.bind(this, this.state.content)
-  // }
+  handleSubmit (event) {
+    event.preventDefault()
+    let content = this.state.content.trim()
+    // validate for empty comment
+    if (!content) {
+      return
+    }
 
-  handleChange (event) {
-    const fieldName = event.target.name
-    const fieldValue = event.target.value
-    this.setState({ [fieldName]: fieldValue })
+    this.props.onCommentSubmit(content)
+    this.setState({ content: '' })
+  }
+
+  handleContentChange (event) {
+    this.setState({ content: event.target.value })
+    // or
+    // const fieldName = event.target.name
+    // const fieldValue = event.target.value
+    // this.setState({ [fieldName]: fieldValue })
     // console.log(this.state)
   }
 
@@ -30,15 +37,10 @@ class CommentForm extends Component {
     // console.log(this.props)
     return (
       <div className='post post-content'>
-        <form id='commentForm' onSubmit={(e) => {
-          e.preventDefault()
-          // console.log('this.props.postId from onSubmit ' + this.props.postId)
-          this.props.addCommentFn(this.state.content, this.props.postId)
-          this.setState({ content: '' })
-        }}>
+        <form id='commentForm' onSubmit={this.handleSubmit}>
           <label>Comment</label>
           <br />
-          <textarea name='content' type='text' value={this.state.content} onChange={this.handleChange} />
+          <textarea name='content' type='text' value={this.state.content} onChange={this.handleContentChange} />
           <br />
           <input type='submit' defaultValue='Add Comment' id='btnPostComment' />
         </form>

@@ -3,6 +3,7 @@ import Navigation from './../common/Navigation'
 import '../../styles/post.css'
 import PostList from '../post/PostList'
 import observer from '../../infrastructure/observer'
+import postsService from '../../infrastructure/postsService'
 
 class Catalog extends Component {
   componentDidMount () {
@@ -22,7 +23,7 @@ class Catalog extends Component {
         <Navigation />
         <section id='viewCatalog'>
           <div className='posts'>
-            <PostList />
+            <PostList request={postsService.loadAllPosts} />
           </div>
         </section>
       </div>

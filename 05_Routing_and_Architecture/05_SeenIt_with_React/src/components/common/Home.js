@@ -1,15 +1,21 @@
 import React, { Component } from 'react'
 import LoginForm from './../user/LoginForm'
 import RegisterForm from './../user/RegisterForm'
-import $ from 'jquery'
-import observer from '../../infrastructure/observer'
+// import $ from 'jquery'
+// import observer from '../../infrastructure/observer'
 
 class Home extends Component {
   componentDidMount () {
-    $(document).on({
-      ajaxStart: () => observer.trigger(observer.events.notification, { type: 'loading', message: 'Loading...' }),
-      ajaxStop: () => $('#loadingBox').fadeOut()
-    })
+    // $(document).on({
+    //   ajaxStart: () => observer.trigger(observer.events.notification, { type: 'loading', message: 'Loading...' }),
+    //   ajaxStop: () => {
+    //     let loadingBox = $('#loadingBox')
+    //     console.log(loadingBox)
+    //     if (loadingBox) {
+    //       loadingBox.fadeOut()
+    //     }
+    //   }
+    // })
   }
 
   render () {
@@ -17,7 +23,7 @@ class Home extends Component {
       <div className='welcome'>
         <div className='signup'>
           <LoginForm {...this.props} />
-          <RegisterForm />
+          <RegisterForm {...this.props} />
         </div>
 
         <div className='about'>

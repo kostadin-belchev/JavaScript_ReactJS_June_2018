@@ -62,7 +62,6 @@ class RegisterForm extends Component {
         <input name='password' type='password' onChange={this.handleChange} value={this.state.password} />
         <label>Repeat Password:</label>
         <input name='repeatPass' type='password' onChange={this.handleChange} value={this.state.repeatPass} />
-        <small>{this.state.passwordsMatch ? null : 'Passwords should match'}</small>
         <input id='btnRegister' type='submit' value='Sign Up' />
       </form>
     )

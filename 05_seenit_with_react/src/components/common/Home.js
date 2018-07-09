@@ -1,21 +1,21 @@
 import React, { Component } from 'react'
 import LoginForm from './../user/LoginForm'
 import RegisterForm from './../user/RegisterForm'
-import $ from 'jquery'
-import observer from '../../infrastructure/observer'
+// import $ from 'jquery'
+// import observer from '../../infrastructure/observer'
 
 class Home extends Component {
   componentDidMount () {
-    $(document).on({
-      ajaxStart: () => observer.trigger(observer.events.notification, { type: 'loading', message: 'Loading...' }),
-      ajaxStop: () => {
-        let loadingBox = $('#loadingBox')
-        console.log(loadingBox)
-        if (loadingBox) {
-          loadingBox.fadeOut()
-        }
-      }
-    })
+    // $(document).on({
+    //   ajaxStart: () => observer.trigger(observer.events.notification, { type: 'loading', message: 'Loading...' }),
+    //   ajaxStop: () => {
+    //     let loadingBox = $('#loadingBox')
+    //     console.log(loadingBox)
+    //     if (loadingBox) {
+    //       loadingBox.fadeOut()
+    //     }
+    //   }
+    // })
   }
 
   render () {

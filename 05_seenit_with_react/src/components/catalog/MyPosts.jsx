@@ -3,6 +3,7 @@ import Navigation from './../common/Navigation'
 import '../../styles/post.css'
 import MyPostsList from '../post/MyPostsList'
 import observer from '../../infrastructure/observer'
+import postsService from '../../infrastructure/postsService'
 
 class MyPosts extends Component {
   componentWillMount () {
@@ -24,7 +25,7 @@ class MyPosts extends Component {
             <h1>Your Posts</h1>
           </div>
           <div className='posts'>
-            <MyPostsList />
+            <MyPostsList request={postsService.loadOwnPosts} reqArguments={{arg1: window.sessionStorage.getItem('username')}} />
           </div>
         </section>
       </div>

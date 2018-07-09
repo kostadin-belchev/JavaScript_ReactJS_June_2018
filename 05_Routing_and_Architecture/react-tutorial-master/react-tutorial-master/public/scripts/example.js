@@ -25,7 +25,7 @@ var Comment = React.createClass({
         </h2>
         <span dangerouslySetInnerHTML={this.rawMarkup()} />
       </div>
-    )
+    );
   }
 });
 

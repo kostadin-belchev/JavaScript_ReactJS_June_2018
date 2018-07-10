@@ -4,5 +4,5 @@ export default function saveSession (userInfo) {
   // eslint-disable-next-line
   sessionStorage.setItem('username', userInfo.username)
   // eslint-disable-next-line
-  sessionStorage.setItem('userId', userInfo._id);
+  sessionStorage.setItem('userId', userInfo._id)
 }

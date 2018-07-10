@@ -22,7 +22,7 @@ class BoundForm extends Component {
 
   render () {
     return (
-      <form onSubmit={this.onSubmit}>
+      <form onSubmit={this.onSubmit} {...this.props}>
         {React.Children.map(this.props.children, (child) => {
           if (child.type === 'input' && child.props.name) {
             return React.cloneElement(child, {onChange: this.onChange, value: this.state[child.props.name]})

@@ -22,12 +22,15 @@ class BoundForm extends Component {
 
   render () {
     return (
-      <form onSubmit={this.onSubmit}>
+      <form onSubmit={this.onSubmit} {...this.props}>
         {React.Children.map(this.props.children, (child) => {
           if (child.type === 'input' && child.props.name) {
             return React.cloneElement(child, {onChange: this.onChange, value: this.state[child.props.name]})
           }
           if (child.type === 'textarea' && child.props.name) {
+            return React.cloneElement(child, {onChange: this.onChange, value: this.state[child.props.name]})
+          }
+          if (child.type === 'button' && child.props.name) {
             return React.cloneElement(child, {onChange: this.onChange, value: this.state[child.props.name]})
           }
           // we can continue the extension here as much as we like, checkbox, radiobutton, etc.

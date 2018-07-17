@@ -22,12 +22,6 @@ class RegisterForm extends Component {
     const fieldName = event.target.name
     const fieldValue = event.target.value
     this.setState({ [fieldName]: fieldValue })
-    // if (this.state.password === this.state.repeatPass) {
-    //   this.setState({ passwordsMatch: true })
-    // } else {
-    //   this.setState({ passwordsMatch: false })
-    // }
-    // console.log(this.state)
   }
 
   handleSubmit (event) {
